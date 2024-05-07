@@ -53,6 +53,7 @@ And then execute:
 
 ```bash
 $ bundle
+$ npm i -D postcss-nesting postcss-partial-import postcss-simple-vars postcss-strip-inline-comments
 ```
 
 ## Usage
