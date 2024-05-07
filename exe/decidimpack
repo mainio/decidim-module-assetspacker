@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+ENV["RAILS_ENV"] ||= "development"
+
+require "bundler/setup"
+require "decidim/assets"
+require "optparse"
+
+require File.expand_path("../lib/decidim/assetspacker/packer", __dir__)
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: decidimpack [options]"
+
+  opts.on("-w", "--watch", "Run with watcher") do |watch|
+    options[:watch] = watch
+  end
+
+  opts.on("-s", "--server", "Run the dev server") do |dev_server|
+    options[:dev_server] = dev_server
+  end
+end.parse!
+
+packer = Decidim::Assetspacker::Packer.instance(Bundler.root, **options)
+packer.run
